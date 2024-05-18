@@ -15,7 +15,7 @@ function App() {
     passwordref.current?.select();
     passwordref.current.setSelectionRange(0, length);
     window.navigator.clipboard.writeText(password);
-  }, [password]);
+  }, [password, length]);
 
   const passwordGenerator = useCallback(() => {
     let pass = "";
@@ -24,12 +24,12 @@ function App() {
     if (char) str += "!@#$%^&*(){}[]~?><";
 
     for (let i = 1; i <= length; i++) {
-      let chara = Math.floor(Math.random() * str.length + 1);
+      let chara = Math.floor(Math.random() * str.length);
       pass += str.charAt(chara);
     }
 
     setpassword(pass);
-  }, [length, number, char, setpassword]);
+  }, [length, number, char]);
 
   useEffect(() => {
     passwordGenerator();
@@ -37,31 +37,32 @@ function App() {
 
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen bg-gray-200">
-        <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-400 text-black">
-          <h1 className="text-4xl text-center m-4">Password Generator</h1>
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="w-full max-w-md mx-auto shadow-lg rounded-lg px-6 py-4 bg-white text-black">
+          <h1 className="text-3xl text-center mb-6 font-bold text-gray-800">
+            Password Generator
+          </h1>
 
-          <div className="flex shadow rounded-lg overflow-hidden mb-4">
+          <div className="flex shadow rounded-lg overflow-hidden mb-6 border border-gray-300">
             <input
               type="text"
               value={password}
-              className="outline-none w-full py-2 px-3"
-              placeholder="Password"
+              className="outline-none w-full py-2 px-3 text-gray-600"
+              placeholder="Generated Password"
               readOnly
               ref={passwordref}
             />
-
             <button
               onClick={copyPassword}
-              className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0"
+              className="outline-none bg-blue-600 text-white px-4 py-2 transition-colors duration-200 hover:bg-blue-700"
             >
               Copy
             </button>
           </div>
 
           <div className="flex flex-col items-center text-sm gap-y-4">
-            <div className="flex items-center gap-x-4">
-              <div className="flex items-center gap-x-1">
+            <div className="flex items-center gap-x-4 mb-4">
+              <div className="flex items-center gap-x-2">
                 <input
                   type="checkbox"
                   checked={number}
@@ -70,9 +71,11 @@ function App() {
                     setnumber((prev) => !prev);
                   }}
                 />
-                <label htmlFor="numberInput">Numbers</label>
+                <label htmlFor="numberInput" className="text-gray-700">
+                  Numbers
+                </label>
               </div>
-              <div className="flex items-center gap-x-1">
+              <div className="flex items-center gap-x-2">
                 <input
                   type="checkbox"
                   checked={char}
@@ -81,12 +84,16 @@ function App() {
                     setchar((prev) => !prev);
                   }}
                 />
-                <label htmlFor="charInput">Characters</label>
+                <label htmlFor="charInput" className="text-gray-700">
+                  Characters
+                </label>
               </div>
             </div>
 
-            <div className="flex items-center gap-x-2">
-              <label htmlFor="length">Length:</label>
+            <div className="flex items-center gap-x-3">
+              <label htmlFor="length" className="text-gray-700">
+                Length:
+              </label>
               <input
                 type="range"
                 min={6}
@@ -103,7 +110,7 @@ function App() {
                 min={6}
                 max={20}
                 value={length}
-                className="border rounded px-2 py-1"
+                className="border rounded px-2 py-1 text-gray-700"
                 onChange={(e) => {
                   const value = e.target.value;
                   if (value >= 6 && value <= 20) {
@@ -112,6 +119,13 @@ function App() {
                 }}
               />
             </div>
+
+            <button
+              onClick={passwordGenerator}
+              className="mt-4 bg-green-600 text-white px-4 py-2 rounded transition-colors duration-200 hover:bg-green-700"
+            >
+              Generate Password
+            </button>
           </div>
         </div>
       </div>
