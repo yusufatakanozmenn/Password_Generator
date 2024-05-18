@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="flex justify-center items-center min-h-screen bg-gray-200">
         <div className="w-full max-w-md mx-auto shadow-lg rounded-lg px-6 py-4 bg-white text-black">
           <h1 className="text-3xl text-center mb-6 font-bold text-gray-800">
             Password Generator
@@ -54,7 +54,7 @@ function App() {
             />
             <button
               onClick={copyPassword}
-              className="outline-none bg-blue-600 text-white px-4 py-2 transition-colors duration-200 hover:bg-blue-700"
+              className="outline-none bg-blue-400 text-white px-4 py-2 transition-colors duration-200 hover:bg-blue-700"
             >
               Copy
             </button>
@@ -122,7 +122,7 @@ function App() {
 
             <button
               onClick={passwordGenerator}
-              className="mt-4 bg-green-600 text-white px-4 py-2 rounded transition-colors duration-200 hover:bg-green-700"
+              className="mt-4 bg-green-700 text-white px-4 py-2 rounded transition-colors duration-200 hover:bg-green-500"
             >
               Generate Password
             </button>
